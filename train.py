@@ -73,7 +73,7 @@ def main():
 #     if not os.path.isdir('./runs'):
 #         os.mkdir('./runs')
     os.makedirs('outputs', exist_ok=True)
-    joblib.dump(model, 'outputs/run_'+str(args.C)+"_"+str(args.max_iter)+'.joblib')
+    joblib.dump(model, 'outputs/run_'+str(accuracy)+"__"+str(args.C)+"_"+str(args.max_iter)+'.joblib')
 
 if __name__ == '__main__':
     main()
