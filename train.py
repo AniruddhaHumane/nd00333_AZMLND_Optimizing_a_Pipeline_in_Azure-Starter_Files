@@ -68,10 +68,16 @@ def main():
 
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
+    
+    #Missing part, need to serialize the model once it is trained, because azure only maintains logs and not the model.
+#     if not os.path.isdir('./runs'):
+#         os.mkdir('./runs')
+    os.makedirs('outputs', exist_ok=True)
+    joblib.dump(model, 'outputs/run_'+str(args.C)+"_"+str(args.max_iter)+'.joblib')
 
 if __name__ == '__main__':
     main()
 
-# %tb
+# !ls
 
 
