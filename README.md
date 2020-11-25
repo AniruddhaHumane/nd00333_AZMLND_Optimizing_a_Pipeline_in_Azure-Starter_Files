@@ -101,12 +101,18 @@ BanditPolicy first trains a model and identifies its accuracy. Once it has a bas
  - During training we can observe that MaxAbsScalar SGD occurs multiple times. What AutoML trying to do in this case is it takes into account its previous runs and tries to optimize its hyperparemeters. And then it tries to see if the current hyperparemeters worked better than the previous one.
  - The information displayed also keeps the track of the maximum accuracy observed so far so that it becomes easier to see which models perform better as compared to previous models.
  - Out of all the models AutoML trained, the ensamble techniques like voting ensables and stack ensables outperformed every other model including the most optimal logistic regression model we achieved through Hyperdrive. The reason for this is ensable techniques like these take multiple models into account and accumulate their results. Hence their performance was much better.
+ - Details of the best model (Voting Ensamble):
+ 	 - The function to explain the AutoML model was suggested by the reviewer. Thank you so much for that, It prints detailed information about the different ML models used in  the ensambling and prints their hyperparemeters
+	 - The voting ensable combined ML various models like xgboostclassifier, lightgbmclassifier, sparsenormalizer, sgdclassifierwrapper, maxabsscaler, standardscalerwrapper and the existing prefittedsoftvotingclassifier.
+	 - There are multiple occurances of these models with different sets of hyperparameters. This is why you see classifiers like XGBoost in the explanation of the model. And as an objective, there's logistic regression in one case while binary logistic classification in another. Other parameters like `max_child_weight`,`eta` vary per occurance of the model.
+	 - Each model contributes to the combined final score.
 
 ## Scope of improvement
 
  - Please specify the problem that we are trying to solve instead of just specifying the dataset directly. The Azure's Hyperdrive and AutoML are techniques to solve such problems and are not the problem itself.
- - We can try any machine learning algorithms other than logistic regression and see how the data behaves. It might perform worse or better. It'll help students practically on how we should go about choosing the model.
+ - We can try any machine learning algorithms other than logistic regression and see how the data behaves with several combinations hyperparameters. We can also try out several robust models like XGBoost and LightGBM.. It'll help students practically on how we should go about choosing the model.
  - We can try other preprocessing techniques including the clean_data function in train.py like sci-kit learns imputer which can help students increase their ETL knowledge.
+ - We can probably collect more data and vary the cross_validations and change the experiment_timeout so that AutoML tries out several models and preprocessing steps to come up with the model having the best performance.
 
 ## Proof of Cluster Cleanup
 I deleted the cluster from the ML Studio's compute section.
